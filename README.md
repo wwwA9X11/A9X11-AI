@@ -119,6 +119,100 @@ Generates text, images, code execution results, web search results, TTS, and mor
 
 ---
 
+
+🔄 Session Management & Reattachment
+
+A9X11 supports stateful sessions using sessionId. This allows users to:
+1️⃣ Start a Session
+
+
+POST https://api.a9x11.com/v1/completions
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+
+{
+  "model": "a9x11-mini",
+  "messages": [
+    {"role":"user","content":"Create a Python script that communicates with an Arduino to control RGB lights via serial. Include clear README and example usage. Return files: arduino_sketch.ino, controller.py, README.md"}
+  ],
+  "stream": false,
+  "sessionId": "session_abc123",
+  "includeCodeExecution": false
+}
+
+Response should include generated source files (strings or file references). Store session_abc123 — it ties together subsequent uploads/edits/downloads.
+2️⃣ Start session and request a safe, high-level Windows driver scaffold (non-actionable)
+
+POST https://api.a9x11.com/v1/completions
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+
+{
+  "model": "a9x11-3.0",
+  "messages": [
+    {"role":"user","content":"Provide a high-level template and developer checklist for writing a Windows kernel-mode driver that exposes a simple device interface (no actual kernel code). Include build steps, signing guidance, and safety best practices. Output files: DRIVER_README.md, DESIGN.md"}
+  ],
+  "stream": false,
+  "sessionId": "session_abc123",
+  "includeCodeExecution": false
+}
+This asks for design & checklist only (safe). If you later need actual driver code, require explicit security review and legal validation.
+
+✅Keep multi-step conversations or code execution context.
+
+✅Reattach to an existing session after disconnect or when performing file/code operations.
+
+3️⃣ Upload multiple files into the session (original DLL, patch instructions, source files)
+POST https://api.a9x11.com/v1/files
+Authorization: Bearer YOUR_API_KEY
+(multipart/form-data)
+Form fields:
+  - file: original.dll
+  - file: helper_patch_script.txt
+  - file: design_notes.md
+  - sessionId: session_abc123
+
+
+Pass the session ID to attach files, run code, or resume SSE streaming.
+4️⃣ Ask AI to patch a file (request safe, high-level modifications or apply provided patch script) — run code execution in sandbox
+POST https://api.a9x11.com/v1/completions
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+
+{
+  "model": "a9x11-mini",
+  "messages": [
+    {"role":"user","content":"Using files attached in this session, apply the patch described in helper_patch_script.txt to original.dll and produce a new file named updated.dll. Validate structure and produce a report describing changes. Do not produce executable patching instructions in plain text; run the patch inside a sandbox and return the updated file reference."}
+  ],
+  "stream": true,
+  "sessionId": "session_abc123",
+  "files": ["original.dll","helper_patch_script.txt"],
+  "includeCodeExecution": true
+}
+The API will run the orchestrated code execution in your configured sandbox/orchestrator. Response (or SSE) should include a mention/reference to updated.dll if created. Do not run this against untrusted binaries without sandboxing.
+
+5️⃣ Reattach later to continue work (reuse same sessionId)
+POST https://api.a9x11.com/v1/completions
+Content-Type: application/json
+Authorization: Bearer YOUR_API_KEY
+
+{
+  "model": "a9x11-mini",
+  "messages": [
+    {"role":"user","content":"Continue the previous session: run additional tests on updated.dll, attach test results to session, and produce diagnostics.txt summarizing results."}
+  ],
+  "stream": true,
+  "sessionId": "session_abc123",
+  "includeCodeExecution": true
+}
+Because session_abc123 is reused, the orchestrator can access previously attached files and state.
+
+⚠️ Note: Sessions expire after 1 day (24 hours). After that, a new sessionId is required.
+
+6️⃣ Download updated file(s) from the session
+GET https://api.a9x11.com/v1/files/download?name=updated.dll&sessionId=session_abc123
+Authorization: Bearer YOUR_API_KEY
+This returns binary data for the updated file. In browser, convert to Blob and trigger download (see earlier example with URL.createObjectURL and creating an <a> element).
 ## 🔔 SSE & Streaming Events
 
 Enable `stream: true` to receive **Server-Sent Events** (SSE) for live processing and token updates.
@@ -173,7 +267,8 @@ Event types:
 - Custom prompts: define system instructions for AI behavior  
 - Session management: use conversationId to maintain context  
 - Cost optimization: choose lower-cost models for high-volume tasks  
-
+- Submit tasks: POST /v1/completions with sessionId + files
+- Download session files: GET /v1/files/download?sessionId=YOUR_SESSION_ID
 ---
 
 ## 🔍 Response Format
