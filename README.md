@@ -1,7 +1,7 @@
 # 🚀 A9X11 API
 
 💎 Official API for the **A9X11 AI Platform**. Access 4 AI models with streaming support, web search, code execution, image analysis, TTS, and more. Designed for integration with websites, applications, or backend systems. Flexible for single queries, interactive sessions, and large-scale tasks.
-
+☕ Support the Project: [Buy Me a Coffee](https://www.buymeacoffee.com/playauraaiw)
 ---
 
 ## 📋 Table of Contents
@@ -227,5 +227,5 @@ API Status: https://status.a9x11.com
 - Enterprise features  
 
 ---
-
+**Enjoying A9X11?** Support us with a coffee: [Buy Me a Coffee](https://www.buymeacoffee.com/playauraaiw)
 **Built with ❤️ by A9X11 Team**
