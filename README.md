@@ -124,15 +124,13 @@ Generates text, images, code execution results, web search results, TTS, and mor
 
 A9X11 supports stateful sessions using sessionId. This allows users to:
 
-
-
 1️⃣ Start a Session
 
-
+```
 POST https://api.a9x11.com/v1/completions
 Content-Type: application/json
 Authorization: Bearer YOUR_API_KEY
-```
+
 {
   "model": "a9x11-mini",
   "messages": [
@@ -144,12 +142,13 @@ Authorization: Bearer YOUR_API_KEY
 }
 ```
 Response should include generated source files (strings or file references). Store session_abc123 — it ties together subsequent uploads/edits/downloads.
+
 2️⃣ Start session and request a safe, high-level Windows driver scaffold (non-actionable)
 
+```
 POST https://api.a9x11.com/v1/completions
 Content-Type: application/json
 Authorization: Bearer YOUR_API_KEY
-```
 {
   "model": "a9x11-3.0",
   "messages": [
@@ -163,7 +162,6 @@ Authorization: Bearer YOUR_API_KEY
 This asks for design & checklist only (safe). If you later need actual driver code, require explicit security review and legal validation.
 
 ✅Keep multi-step conversations or code execution context.
-
 ✅Reattach to an existing session after disconnect or when performing file/code operations.
 
 3️⃣ Upload multiple files into the session (original DLL, patch instructions, source files)
@@ -180,11 +178,13 @@ Form fields:
 ```
 
 Pass the session ID to attach files, run code, or resume SSE streaming.
+
 4️⃣ Ask AI to patch a file (request safe, high-level modifications or apply provided patch script) — run code execution in sandbox
+
+```
 POST https://api.a9x11.com/v1/completions
 Content-Type: application/json
 Authorization: Bearer YOUR_API_KEY
-```
 {
   "model": "a9x11-mini",
   "messages": [
