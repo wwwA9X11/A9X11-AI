@@ -239,6 +239,7 @@ Event types:
 - search_start – web search initiated  
   Payload example: { "type": "search_start", "query": "latest AI news" }
 ```
+
 ```
 - search_results – partial web search results returned  
   Payload example: { "type": "search_results", "results": [{"title":"AI breakthrough","url":"https://example.com"}], "tokens_processed": 432 }
