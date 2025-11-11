@@ -243,7 +243,6 @@ Event types:
 ```
 - search_results – partial web search results returned  
   Payload example: { "type": "search_results", "results": [{"title":"AI breakthrough","url":"https://example.com"}], "
-  
   tokens_processed": 432 }
 ```
 ```
