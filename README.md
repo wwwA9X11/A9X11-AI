@@ -227,46 +227,58 @@ This returns binary data for the updated file. In browser, convert to Blob and t
 Enable `stream: true` to receive **Server-Sent Events** (SSE) for live processing and token updates.
 
 Event types:
-
+```
 - connected – connection established  
   Payload example: { "type": "connected", "timestamp": 1699999999999 }
-
+```
+```
 - stage – current processing stage (analyzing, thinking, web_search, generation, tools, TTS)  
   Payload example: { "type": "stage", "stage": "thinking", "tokens_processed": 1234 }
-
+```
+```
 - search_start – web search initiated  
   Payload example: { "type": "search_start", "query": "latest AI news" }
-
+```
+```
 - search_results – partial web search results returned  
   Payload example: { "type": "search_results", "results": [{"title":"AI breakthrough","url":"https://example.com"}], "tokens_processed": 432 }
-
+```
+```
 - tools_start – tool execution starting  
   Payload example: { "type": "tools_start", "tool": "code_execution", "tokens_processed": 100 }
-
+```
+```
 - tools_complete – tool execution finished  
   Payload example: { "type": "tools_complete", "tool": "code_execution", "output": "...", "tokens_processed": 210 }
-
+```
+```
 - chunk – partial text/content generated in real-time  
   Payload example: { "type": "chunk", "text": "Hello, world", "tokens_processed": 10 }
-
+```
+```
 - image_generated – new AI-generated image available  
   Payload example: { "type": "image_generated", "url": "https://example.com/image.png" }
-
+```
+```
 - transcription – audio transcription returned  
   Payload example: { "type": "transcription", "text": "Hello world", "tokens_processed": 12 }
-
+```
+```
 - tts_start – text-to-speech synthesis started  
   Payload example: { "type": "tts_start", "text": "Hello world" }
-
+```
+```
 - tts_complete – TTS finished  
   Payload example: { "type": "tts_complete", "audio_url": "https://example.com/audio.mp3" }
-
+```
+```
 - done – AI generation fully completed  
   Payload example: { "type": "done", "tokens_total": 500 }
-
+```
+```
 - error – an error occurred during processing  
   Payload example: { "type": "error", "message": "Something went wrong" }
-
+```
 ---
 
 ## 🔧 Advanced Usage
