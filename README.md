@@ -1,6 +1,7 @@
 # 🚀 A9X11 API
 
 💎 Official API for the **A9X11 AI Platform**. Access 4 AI models with streaming support, web search, code execution, image analysis, TTS, and more. Designed for integration with websites, applications, or backend systems. Flexible for single queries, interactive sessions, and large-scale tasks.  
+<img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/5a005b54-bc0b-44fe-a40c-c91fd081bdf7" />
 
 
 ☕ Support the Project:  
@@ -28,6 +29,8 @@
 ---
 
 ## 🌟 Overview
+<img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/79da416e-72b3-48c6-bbec-f2f4ec397458" />
+<img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/f82f5887-43a3-40fc-ab43-4fbc4716aefe" />
 
 A9X11 provides 4 versatile AI models, optimized for different workloads and costs:
 
@@ -284,6 +287,7 @@ Event types:
 ---
 
 ## 🔧 Advanced Usage
+<img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/4abcea03-ad9c-4cde-b2c4-3d2053cf86d4" />
 
 - Batch queries: submit multiple messages in one request  
 - Depth control: "quick" for lightweight, "deep" for detailed reasoning  
