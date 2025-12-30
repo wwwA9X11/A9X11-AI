@@ -1,7 +1,8 @@
 # 🚀 A9X11 API
 
 💎 Official API for the **A9X11 AI Platform**. Access 4 AI models with streaming support, web search, code execution, image analysis, TTS, and more. Designed for integration with websites, applications, or backend systems. Flexible for single queries, interactive sessions, and large-scale tasks.  
-<img width="1920" height="1040" alt="image" src="https://github.com/user-attachments/assets/5a005b54-bc0b-44fe-a40c-c91fd081bdf7" />
+<img width="1919" height="995" alt="image" src="https://github.com/user-attachments/assets/bac2e1ed-6a02-475a-9952-446c00689266" />
+
 
 
 ☕ Support the Project:  
